@@ -81,9 +81,7 @@ public class BorderedText {
         canvas.drawText(text, posX, posY, interiorPaint);
     }
 
-    public void drawText(
-            final Canvas canvas, final float posX, final float posY, final String text, Paint bgPaint) {
-
+    public void drawText(final Canvas canvas, final float posX, final float posY, final String text, Paint bgPaint) {
         float width = exteriorPaint.measureText(text);
         float textSize = exteriorPaint.getTextSize();
         Paint paint = new Paint(bgPaint);

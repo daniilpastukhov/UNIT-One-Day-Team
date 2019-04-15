@@ -1,7 +1,6 @@
 package org.tensorflow.lite.examples.detection.ecoapp;
 
-import android.graphics.Color;
-import android.text.TextPaint;
+import android.graphics.Canvas;
 
 import org.tensorflow.lite.examples.detection.env.BorderedText;
 
@@ -9,7 +8,7 @@ public class TextField {
     private final BorderedText borderedText;
 
     TextField() {
-        borderedText = new BorderedText(Color.WHITE, Color.BLACK, 40);
+        borderedText = new BorderedText(40);
     }
 
     TextField(final int textSize) {
@@ -18,11 +17,7 @@ public class TextField {
 
     // int[] coords - 4 coordinates of box model
     // String hint - string which contains a hint (max. 100 letters)
-    public void drawTextField(int[] coords, String hint) {
-        // TODO
-        borderedText.drawText();
-
-
-
+    public void drawTextField(Canvas canvas, final int x, final int y, String hint) {
+        borderedText.drawText(canvas, x, y, hint);
     }
 }
