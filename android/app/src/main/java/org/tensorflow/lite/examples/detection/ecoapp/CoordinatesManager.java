@@ -16,7 +16,7 @@ public class CoordinatesManager {
     public static void clearTextBoxes(){
         textBoxes = new ArrayList<>();
     }
-
+/*
     public static Rect getTextBoxPosition(Rect detectedBox) {
         Rect textBox = new Rect();
         //join left
@@ -49,9 +49,9 @@ public class CoordinatesManager {
             return textBox;
         }
         return null;
-    }
+    }*/
 
-    public static Rect getTextBox(Rect detectedBox){
+    public static Rect getTextBoxPosition(Rect detectedBox){
         Rect textBox = new Rect();
         if (detectedBox.left - Constants.textBoxWidth >= 0){
             textBox.left = detectedBox.left - Constants.textBoxWidth;
@@ -70,6 +70,7 @@ public class CoordinatesManager {
                 textBox.top += Constants.boxShift;
                 textBox.bottom = textBox.top + Constants.textBoxWHeight;
             }else {
+                textBoxes.add(textBox);
                 return textBox;
             }
         } while (textBox.top < detectedBox.bottom - Constants.boxShift);
