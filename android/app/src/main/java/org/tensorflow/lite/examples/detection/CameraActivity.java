@@ -52,6 +52,7 @@ import android.widget.Toast;
 
 import java.nio.ByteBuffer;
 
+import org.tensorflow.lite.examples.detection.ecoapp.Constants;
 import org.tensorflow.lite.examples.detection.env.ImageUtils;
 import org.tensorflow.lite.examples.detection.env.Logger;
 
@@ -93,8 +94,10 @@ public abstract class CameraActivity extends AppCompatActivity
         LOGGER.d("onCreate " + this);
         super.onCreate(null);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
         setContentView(R.layout.activity_camera);
+        Constants.SCREENWIDTH = getWindowManager().getDefaultDisplay().getWidth();
+        Constants.SCREENHEIGHT = getWindowManager().getDefaultDisplay().getHeight();
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
