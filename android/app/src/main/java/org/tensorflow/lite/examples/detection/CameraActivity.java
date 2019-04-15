@@ -98,7 +98,6 @@ public abstract class CameraActivity extends AppCompatActivity
         setContentView(R.layout.activity_camera);
         Constants.SCREENWIDTH = getWindowManager().getDefaultDisplay().getWidth();
         Constants.SCREENHEIGHT = getWindowManager().getDefaultDisplay().getHeight();
-        Constants.textBoxWidth = Constants.SCREENWIDTH / 3;
 
         Toolbar toolbar = findViewById(R.id.scrollingView);
         setSupportActionBar(toolbar);

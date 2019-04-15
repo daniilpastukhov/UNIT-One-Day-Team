@@ -3,7 +3,6 @@ package org.tensorflow.lite.examples.detection.ecoapp;
 import android.graphics.Rect;
 
 import java.util.ArrayList;
-import java.util.zip.CheckedInputStream;
 
 public class CoordinatesManager {
     /*to do
@@ -11,7 +10,18 @@ public class CoordinatesManager {
     compute text box position
     return Rect  (x,y,width,height)
      */
+    private static int width;
+    private static int height;
+    private static final int WIDTH = 0;
+    private static final int HEIGHT = 1;
+
+
     private static ArrayList<Rect> textBoxes;
+
+    public static void setTextBoxParams(int[] boxParams){
+        width = boxParams[WIDTH];
+        height = boxParams[HEIGHT];
+    }
 
     public static void clearTextBoxes(){
         textBoxes = new ArrayList<>();
@@ -20,30 +30,30 @@ public class CoordinatesManager {
     public static Rect getTextBoxPosition(Rect detectedBox) {
         Rect textBox = new Rect();
         //join left
-        if (detectedBox.left + Constants.textBoxWidth < Constants.SCREENWIDTH){
+        if (detectedBox.left + Constants.width < Constants.SCREENWIDTH){
             textBox.left = detectedBox.left;
         }
-        else if(detectedBox.left - Constants.textBoxWidth >= 0){
-            textBox.left = detectedBox.left - Constants.textBoxWidth;
+        else if(detectedBox.left - Constants.width >= 0){
+            textBox.left = detectedBox.left - Constants.width;
         }
         else{
-            textBox.left = detectedBox.right - Constants.textBoxWidth;
+            textBox.left = detectedBox.right - Constants.width;
         }
-        textBox.right = textBox.left + Constants.textBoxWidth;
+        textBox.right = textBox.left + Constants.width;
         //join top
-        if (detectedBox.bottom + Constants.textBoxWHeight < Constants.SCREENHEIGHT){
+        if (detectedBox.bottom + Constants.height < Constants.SCREENHEIGHT){
             textBox.top = detectedBox.bottom;
         }
-        else if (detectedBox.top - Constants.textBoxWHeight >= 0){
-            textBox.top = detectedBox.top - Constants.textBoxWHeight;
+        else if (detectedBox.top - Constants.height >= 0){
+            textBox.top = detectedBox.top - Constants.height;
         }
-        else if(detectedBox.bottom - Constants.textBoxWHeight >= 0){
-            textBox.top = detectedBox.bottom - Constants.textBoxWHeight;
+        else if(detectedBox.bottom - Constants.height >= 0){
+            textBox.top = detectedBox.bottom - Constants.height;
         }
         else {
             textBox.top = detectedBox.top;
         }
-        textBox.bottom = textBox.top + Constants.textBoxWHeight;
+        textBox.bottom = textBox.top + Constants.height;
         if (!isIntersect(textBox)){
             textBoxes.add(textBox);
             return textBox;
@@ -53,22 +63,22 @@ public class CoordinatesManager {
 
     public static Rect getTextBoxPosition(Rect detectedBox){
         Rect textBox = new Rect();
-        if (detectedBox.left - Constants.textBoxWidth >= 0){
-            textBox.left = detectedBox.left - Constants.textBoxWidth;
+        if (detectedBox.left - width >= 0){
+            textBox.left = detectedBox.left - width;
         }
-        else if (detectedBox.left + Constants.textBoxWidth < Constants.SCREENWIDTH){
+        else if (detectedBox.left + width < Constants.SCREENWIDTH){
             textBox.left = detectedBox.left;
         }
         else {
-            textBox.left = detectedBox.right - Constants.textBoxWidth;
+            textBox.left = detectedBox.right - width;
         }
-        textBox.right = textBox.left + Constants.textBoxWidth;
+        textBox.right = textBox.left + width;
         textBox.top = detectedBox.top;
-        textBox.bottom = textBox.top + Constants.textBoxWHeight;
+        textBox.bottom = textBox.top + height;
         do {
             if (isIntersect(textBox)){
                 textBox.top += Constants.boxShift;
-                textBox.bottom = textBox.top + Constants.textBoxWHeight;
+                textBox.bottom = textBox.top + height;
             }else {
                 textBoxes.add(textBox);
                 return textBox;
