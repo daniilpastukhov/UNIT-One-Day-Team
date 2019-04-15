@@ -19,7 +19,7 @@ public class TextField {
     private static final char NEWLINE = '\n';
     private static final String SPACE_SEPARATOR = " ";
     private static final String SPLIT_REGEXP= "\\s+";
-    private static final int rowLength = 30;
+    private static final int rowLength = 20;
 
     public TextField() {
         borderedText = new BorderedText(20);
