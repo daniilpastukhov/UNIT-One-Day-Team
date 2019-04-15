@@ -11,6 +11,7 @@ public class HintManager {
     public static String getHint(String objectName) {
         // TODO HashMap, body of this function
 
+
         return new String();
     }
 }
