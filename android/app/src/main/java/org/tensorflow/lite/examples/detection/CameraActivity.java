@@ -99,7 +99,7 @@ public abstract class CameraActivity extends AppCompatActivity
         Constants.SCREENWIDTH = getWindowManager().getDefaultDisplay().getWidth();
         Constants.SCREENHEIGHT = getWindowManager().getDefaultDisplay().getHeight();
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.scrollingView);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 

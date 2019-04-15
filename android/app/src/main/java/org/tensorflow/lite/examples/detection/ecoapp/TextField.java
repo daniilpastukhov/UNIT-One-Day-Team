@@ -17,7 +17,7 @@ public class TextField {
     private static final String SPLIT_REGEXP= "\\s+";
 
     public TextField() {
-        borderedText = new BorderedText(40);
+        borderedText = new BorderedText(20);
     }
 
     public TextField(final int textSize) {
