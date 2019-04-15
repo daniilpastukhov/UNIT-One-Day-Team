@@ -37,7 +37,7 @@ public class HintScrolling extends AppCompatActivity {
 
     private void addHints() {
         LayoutInflater vi = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = vi.inflate(R.layout.activity_hint_scrolling, null);
+        View v = vi.inflate(R.layout.content_hint_scrolling, null);
         LinkedList<String> hintsList = getKeys();
 
         for (String hint: hintsList) {
