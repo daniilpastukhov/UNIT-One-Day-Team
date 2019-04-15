@@ -554,7 +554,7 @@ public abstract class CameraActivity extends AppCompatActivity
 
     protected abstract void setUseNNAPI(boolean isChecked);
 
-    public void showHints(View view) {
+    public void showHints(View view) { // change view
         setContentView(R.layout.activity_hint_scrolling);
     }
 }
