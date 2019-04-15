@@ -23,7 +23,6 @@ public class TextField {
 
     public TextField() {
         borderedText = new BorderedText(20);
-
     }
 
     public TextField(final int textSize) {

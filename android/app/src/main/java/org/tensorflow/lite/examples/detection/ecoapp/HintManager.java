@@ -3,7 +3,7 @@ package org.tensorflow.lite.examples.detection.ecoapp;
 import java.util.HashMap;
 
 public class HintManager {
-    private static HashMap<String, String> hints = new HashMap<String, String>() {
+    public static HashMap<String, String> hints = new HashMap<String, String>() {
         {
             put("person", "Be mindful of what you throw in the trash.");
             put("sandwich", "Stop eating meat (or at least reduce it).");
