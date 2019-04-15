@@ -33,10 +33,11 @@ public class TextField {
     public int[] getTextBoxSize(String hint) {
         int size[] = new int[2];
         List<String> parts = splitString(hint, rowLength);
-        int height = 50;
+
         Rect bounds = new Rect();
         Paint paint = new Paint();
         paint.getTextBounds(hint, 0, rowLength, bounds);
+        int height = bounds.height() * 2;
         for (int i = 0; i < parts.size(); i++) { height += 50; }
         size[0] = bounds.width();
         size[1] = height;
