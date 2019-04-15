@@ -3,6 +3,7 @@ package org.tensorflow.lite.examples.detection.ecoapp;
 import android.graphics.Rect;
 
 import java.util.ArrayList;
+import java.util.zip.CheckedInputStream;
 
 public class CoordinatesManager {
     /*to do
@@ -15,7 +16,7 @@ public class CoordinatesManager {
     public static void clearTextBoxes(){
         textBoxes = new ArrayList<>();
     }
-
+/*
     public static Rect getTextBoxPosition(Rect detectedBox) {
         Rect textBox = new Rect();
         //join left
@@ -48,9 +49,30 @@ public class CoordinatesManager {
             return textBox;
         }
         return null;
-    }
+    }*/
 
-    public static Rect getTextBox(){
+    public static Rect getTextBoxPosition(Rect detectedBox){
+        Rect textBox = new Rect();
+        if (detectedBox.left - Constants.textBoxWidth >= 0){
+            textBox.left = detectedBox.left - Constants.textBoxWidth;
+        }
+        else if (detectedBox.left + Constants.textBoxWidth < Constants.SCREENWIDTH){
+            textBox.left = detectedBox.left;
+        }
+        else {
+            textBox.left = detectedBox.right - Constants.textBoxWidth;
+        }
+        textBox.right = textBox.left + Constants.textBoxWidth;
+        textBox.top = detectedBox.top;
+        textBox.bottom = textBox.top + Constants.textBoxWHeight;
+        do {
+            if (isIntersect(textBox)){
+                textBox.top += Constants.boxShift;
+                textBox.bottom = textBox.top + Constants.textBoxWHeight;
+            }else {
+                return textBox;
+            }
+        } while (textBox.top < detectedBox.bottom - Constants.boxShift);
         return null;
     }
 
