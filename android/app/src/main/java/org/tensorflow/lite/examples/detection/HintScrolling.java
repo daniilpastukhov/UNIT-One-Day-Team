@@ -24,17 +24,6 @@ public class HintScrolling extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hint_scrolling);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     private LinkedList<String> getKeys() {
@@ -55,7 +44,7 @@ public class HintScrolling extends AppCompatActivity {
             TextView textView = v.findViewById(R.id.hint_view);
             textView.setText(hint);
 
-            ViewGroup insertPoint = findViewById(R.id.scrollingView);
+            ViewGroup insertPoint = findViewById(R.id.hints_list);
             insertPoint.addView(v, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
         }
     }
