@@ -27,7 +27,7 @@ public class HintManager {
             put("orange", "Orange is orange as my knowledge.");
             put("pizza", "The most favourite food of ninja turtles.");
             put("cake", "Food that loves everyone.");
-            put("dining table", "You can spend some time here.")
+            put("dining table", "You can spend some time here.");
         }
     };
 

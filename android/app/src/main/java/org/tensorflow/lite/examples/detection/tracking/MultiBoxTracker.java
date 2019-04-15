@@ -190,12 +190,15 @@ public class MultiBoxTracker {
             //canvas.drawRoundRect(trackedPos, cornerSize, cornerSize, boxPaint);
 
             String hint = HintManager.getHint(recognition.title);
+            String titleUpper = recognition.title.substring(0, 1).toUpperCase() + recognition.title.substring(1);
             if (hint == null) hint = "";
 
             final String labelString =
                     !TextUtils.isEmpty(recognition.title)
-                            ? String.format("%s  %s", recognition.title, hint)
+                            ? String.format("%s\n%s", titleUpper, hint)
                             : String.format("Unknown object");
+
+            CoordinatesManager.setTextBoxParams(textField.getTextBoxSize(labelString));
             Rect boxParametrs = CoordinatesManager.getTextBoxPosition(new Rect((int)trackedPos.left, (int)trackedPos.top, (int)trackedPos.right, (int)trackedPos.bottom));
             if (boxParametrs != null) {
                 boxPaint.setColor(recognition.color);
