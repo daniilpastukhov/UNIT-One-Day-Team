@@ -38,14 +38,14 @@ public class HintScrolling extends AppCompatActivity {
 
     private void addHints() {
         LayoutInflater vi = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = vi.inflate(R.layout.content_hint_scrolling, null);
+        View v = vi.inflate(R.layout.activity_hint_scrolling, null);
         LinkedList<String> hintsList = getKeys();
 
-        for (String hint: hintsList) {
+        for (String hint : hintsList) {
             TextView textView = v.findViewById(R.id.hint_view);
             textView.setText(hint);
 
-            ViewGroup insertPoint = findViewById(R.id.hints_list);
+            ViewGroup insertPoint = findViewById(R.id.scrollingView);
             insertPoint.addView(v, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
         }
     }
