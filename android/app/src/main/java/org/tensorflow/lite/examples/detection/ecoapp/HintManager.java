@@ -32,7 +32,7 @@ public class HintManager {
     };
 
     public static String getHint(String objectName) {
-        return objectName + System.getProperty("line.separator") + hints.get(objectName);
+        return hints.get(objectName);
     }
 
     public static void changeText(String key, String newText) {

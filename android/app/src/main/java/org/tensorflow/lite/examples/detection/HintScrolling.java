@@ -25,4 +25,8 @@ public class HintScrolling extends AppCompatActivity {
             }
         });
     }
+
+    class HintList {
+
+    }
 }
