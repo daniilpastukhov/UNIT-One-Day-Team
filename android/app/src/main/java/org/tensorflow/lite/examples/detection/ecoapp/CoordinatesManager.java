@@ -17,31 +17,45 @@ public class CoordinatesManager {
     }
 
     public static Rect getTextBoxPosition(Rect detectedBox) {
-        Rect boxParams = new Rect();
+        Rect textBox = new Rect();
+        //join left
         if (detectedBox.left + Constants.textBoxWidth < Constants.SCREENWIDTH){
-            boxParams.left = detectedBox.left;
+            textBox.left = detectedBox.left;
+        }
+        else if(detectedBox.left - Constants.textBoxWidth >= 0){
+            textBox.left = detectedBox.left - Constants.textBoxWidth;
         }
         else{
-            boxParams.left = Constants.SCREENWIDTH - Constants.textBoxWidth;
+            textBox.left = detectedBox.right - Constants.textBoxWidth;
         }
-        boxParams.right = boxParams.left + Constants.textBoxWidth;
-
+        textBox.right = textBox.left + Constants.textBoxWidth;
+        //join top
         if (detectedBox.bottom + Constants.textBoxWHeight < Constants.SCREENHEIGHT){
-            boxParams.top = detectedBox.bottom;
+            textBox.top = detectedBox.bottom;
         }
         else if (detectedBox.top - Constants.textBoxWHeight >= 0){
-            boxParams.top = detectedBox.top - Constants.textBoxWHeight;
+            textBox.top = detectedBox.top - Constants.textBoxWHeight;
         }
         else if(detectedBox.bottom - Constants.textBoxWHeight >= 0){
-            boxParams.top = detectedBox.bottom - Constants.textBoxWHeight;
+            textBox.top = detectedBox.bottom - Constants.textBoxWHeight;
         }
         else {
-            boxParams.top = detectedBox.top;
+            textBox.top = detectedBox.top;
         }
-        boxParams.bottom = boxParams.top + Constants.textBoxWHeight;
-        textBoxes.add(boxParams);
-        return boxParams;
+        textBox.bottom = textBox.top + Constants.textBoxWHeight;
+        if (!isIntersect(textBox)){
+            textBoxes.add(textBox);
+            return textBox;
+        }
+        return null;
     }
 
-
+    private static boolean isIntersect(Rect textBox){
+        for (Rect box: textBoxes){
+            if (Rect.intersects(textBox, box)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

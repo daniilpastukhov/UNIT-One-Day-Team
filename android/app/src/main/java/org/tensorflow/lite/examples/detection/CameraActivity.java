@@ -91,6 +91,7 @@ public abstract class CameraActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+
         LOGGER.d("onCreate " + this);
         super.onCreate(null);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -238,6 +239,11 @@ public abstract class CameraActivity extends AppCompatActivity
      */
     @Override
     public void onImageAvailable(final ImageReader reader) {
+        int numThreads = Integer.parseInt(threadsTextView.getText().toString().trim());
+        numThreads++;
+        setNumThreads(numThreads);
+        numThreads--;
+        setNumThreads(numThreads);
         // We need wait until we have some size from onPreviewSizeChosen
         if (previewWidth == 0 || previewHeight == 0) {
             return;
@@ -505,7 +511,7 @@ public abstract class CameraActivity extends AppCompatActivity
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.plus) {
+        /*if (v.getId() == R.id.plus) {
             String threads = threadsTextView.getText().toString().trim();
             int numThreads = Integer.parseInt(threads);
             if (numThreads >= 9) return;
@@ -521,7 +527,7 @@ public abstract class CameraActivity extends AppCompatActivity
             numThreads--;
             threadsTextView.setText(String.valueOf(numThreads));
             setNumThreads(numThreads);
-        }
+        }*/
     }
 
     protected void showFrameInfo(String frameInfo) {
