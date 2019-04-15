@@ -21,16 +21,29 @@ public class TextField {
 
     public TextField() {
         borderedText = new BorderedText(20);
+
     }
 
     public TextField(final int textSize) {
         borderedText = new BorderedText(textSize);
     }
 
+    public int[] getTextBoxSize(String hint) {
+        int size[] = new int[2];
+        List<String> parts = splitString(hint, 30);
+        int width = 0;
+        int height = 50;
+        for (int i = 0; i < parts.size(); i++) { height += 50; width = (parts.get(i).length() > width) ? parts.get(i).length() : width; }
+        size[0] = width;
+        size[1] = height;
+        return size; // width x height
+    }
+
     // int[] coords - 4 coordinates of box model
     // String hint - string which contains a hint (max. 100 letters)
     public void drawTextField(Canvas canvas, int x, int y, String hint) {
         List<String> parts = splitString(hint, 30);
+        y += 50;
         for (int i = 0; i < parts.size(); i++) {
             borderedText.drawText(canvas, x, y, parts.get(i));
             y += 50;
