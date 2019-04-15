@@ -190,7 +190,7 @@ public class MultiBoxTracker {
             //            borderedText.drawText(canvas, trackedPos.left + cornerSize, trackedPos.top,
             // labelString);
             borderedText.drawText(
-                    canvas, trackedPos.left + cornerSize, trackedPos.top, labelString + "%", boxPaint);
+                    canvas, trackedPos.left + cornerSize, trackedPos.top, labelString, boxPaint);
 
         }
     }
@@ -212,13 +212,13 @@ public class MultiBoxTracker {
             this.sensorOrientation = sensorOrientation;
             initialized = true;
 
-            if (objectTracker == null) {
+            /*if (objectTracker == null) {
                 String message =
                         "Object tracking support not found. "
                                 + "See tensorflow/examples/android/README.md for details.";
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show();
                 logger.e(message);
-            }
+            }*/
         }
 
         if (objectTracker == null) {
