@@ -42,4 +42,7 @@
 
     </RelativeLayout>
 
+    <include
+        android:id="@+id/bottom_sheet_layout"
+        layout="@layout/layout_bottom_sheet" />
 </android.support.design.widget.CoordinatorLayout>
