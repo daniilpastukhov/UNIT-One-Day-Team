@@ -30,8 +30,8 @@ public class TextField {
     // int[] coords - 4 coordinates of box model
     // String hint - string which contains a hint (max. 100 letters)
     public void drawTextField(Canvas canvas, int x, int y, String hint) {
-        List<String> parts = splitString(hint, 20);
-        for (int i = 0; i < 5; i++) {
+        List<String> parts = splitString(hint, 30);
+        for (int i = 0; i < parts.size(); i++) {
             borderedText.drawText(canvas, x, y, parts.get(i));
             y += 50;
         }

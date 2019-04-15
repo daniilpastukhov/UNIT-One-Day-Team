@@ -36,6 +36,8 @@ import java.util.Queue;
 
 import org.tensorflow.lite.examples.detection.ecoapp.CoordinatesManager;
 import org.tensorflow.lite.examples.detection.ecoapp.DetectedObjectsManager;
+import org.tensorflow.lite.examples.detection.ecoapp.HintManager;
+import org.tensorflow.lite.examples.detection.ecoapp.TextField;
 import org.tensorflow.lite.examples.detection.env.BorderedText;
 import org.tensorflow.lite.examples.detection.env.ImageUtils;
 import org.tensorflow.lite.examples.detection.env.Logger;
@@ -80,6 +82,7 @@ public class MultiBoxTracker {
     private final Paint boxPaint = new Paint();
     private final float textSizePx;
     private final BorderedText borderedText;
+    private final TextField textField;
     private final DetectedObjectsManager detectedObjectsManager;
     public ObjectTracker objectTracker;
     private Matrix frameToCanvasMatrix;
@@ -106,6 +109,8 @@ public class MultiBoxTracker {
                 TypedValue.applyDimension(
                         TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE_DIP, context.getResources().getDisplayMetrics());
         borderedText = new BorderedText(textSizePx);
+        textField = new TextField((int)textSizePx);
+
         detectedObjectsManager = new DetectedObjectsManager();
     }
 
@@ -178,25 +183,26 @@ public class MultiBoxTracker {
                             : new RectF(recognition.location);
 
             getFrameToCanvasMatrix().mapRect(trackedPos);
-            boxPaint.setColor(recognition.color);
+            //boxPaint.setColor(recognition.color);
 
             float cornerSize = Math.min(trackedPos.width(), trackedPos.height()) / 8.0f;
             cornerSize = 1.0f;
-            canvas.drawRoundRect(trackedPos, cornerSize, cornerSize, boxPaint);
+            //canvas.drawRoundRect(trackedPos, cornerSize, cornerSize, boxPaint);
+
+            String hint = HintManager.getHint(recognition.title);
+            if (hint == null) hint = "";
 
             final String labelString =
                     !TextUtils.isEmpty(recognition.title)
-                            ? String.format("%s", recognition.title)
+                            ? String.format("%s  %s", recognition.title, hint)
                             : String.format("Unknown object");
-                            /*? String.format("%s %.2f", recognition.title, (100 * recognition.detectionConfidence))
-                            : String.format("%.2f", (100 * recognition.detectionConfidence));*/
-            //            borderedText.drawText(canvas, trackedPos.left + cornerSize, trackedPos.top,
-            // labelString);
-            /*borderedText.drawText(
-                    canvas, trackedPos.left + cornerSize, trackedPos.top, labelString, boxPaint);*/
             Rect boxParametrs = CoordinatesManager.getTextBoxPosition(new Rect((int)trackedPos.left, (int)trackedPos.top, (int)trackedPos.right, (int)trackedPos.bottom));
-            borderedText.drawText(
-                    canvas, boxParametrs.left + cornerSize, boxParametrs.top, labelString, boxPaint);
+            if (boxParametrs != null) {
+                boxPaint.setColor(recognition.color);
+                canvas.drawRoundRect(trackedPos, cornerSize, cornerSize, boxPaint);
+                textField.drawTextField(canvas, boxParametrs.left, boxParametrs.top,
+                        labelString);
+            }
 
 
         }
