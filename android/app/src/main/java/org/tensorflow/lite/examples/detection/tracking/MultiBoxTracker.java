@@ -33,6 +33,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+import org.tensorflow.lite.examples.detection.ecoapp.DetectedObjectsManager;
 import org.tensorflow.lite.examples.detection.env.BorderedText;
 import org.tensorflow.lite.examples.detection.env.ImageUtils;
 import org.tensorflow.lite.examples.detection.env.Logger;
@@ -102,6 +103,7 @@ public class MultiBoxTracker {
                 TypedValue.applyDimension(
                         TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE_DIP, context.getResources().getDisplayMetrics());
         borderedText = new BorderedText(textSizePx);
+        DetectedObjectsManager detectedObjectsManager = new DetectedObjectsManager();
     }
 
     private Matrix getFrameToCanvasMatrix() {
@@ -123,6 +125,7 @@ public class MultiBoxTracker {
             canvas.drawRect(rect, boxPaint);
             canvas.drawText("" + detection.first, rect.left, rect.top, textPaint);
             borderedText.drawText(canvas, rect.centerX(), rect.centerY(), "" + detection.first);
+
         }
 
         if (objectTracker == null) {
