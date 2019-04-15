@@ -34,7 +34,7 @@ public class TextField {
         int width = 0;
         int height = 50;
         for (int i = 0; i < parts.size(); i++) { height += 50; width = (parts.get(i).length() > width) ? parts.get(i).length() : width; }
-        size[0] = width;
+        size[0] = width * 10;
         size[1] = height;
         return size; // width x height
     }
