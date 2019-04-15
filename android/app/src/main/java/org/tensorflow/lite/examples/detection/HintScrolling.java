@@ -29,7 +29,7 @@ public class HintScrolling extends AppCompatActivity {
         });
     }
 
-    class hintList extends BaseAdapter {
+    class hintList {
         private final ScrollingView scrollView;
         Context context;
 

@@ -1,10 +1,8 @@
 package org.tensorflow.lite.examples.detection.ecoapp;
 
-
 import java.util.HashMap;
 
 public class HintManager {
-
     private static HashMap<String, String> hints = new HashMap<String, String>() {
         {
             put("person", "Be mindful of what you throw in the trash.");

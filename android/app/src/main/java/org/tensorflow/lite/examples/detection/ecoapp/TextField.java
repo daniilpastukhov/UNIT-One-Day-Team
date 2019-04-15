@@ -5,9 +5,12 @@ import android.graphics.Rect;
 
 import org.tensorflow.lite.examples.detection.env.BorderedText;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TextField {
     private BorderedText borderedText;
@@ -27,27 +30,22 @@ public class TextField {
     // int[] coords - 4 coordinates of box model
     // String hint - string which contains a hint (max. 100 letters)
     public void drawTextField(Canvas canvas, int x, int y, String hint) {
-        String[] parts = breakLines(hint, 20);
+        List<String> parts = splitString(hint, 20);
         for (int i = 0; i < 5; i++) {
-            borderedText.drawText(canvas, x, y, parts[i]);
+            borderedText.drawText(canvas, x, y, parts.get(i));
             y += 50;
         }
     }
 
-    private String[] breakLines(String input, int maxLineLength) {
-        StringTokenizer tok = new StringTokenizer(input, " ");
-        StringBuilder output = new StringBuilder(input.length());
-        int lineLen = 0;
-        while (tok.hasMoreTokens()) {
-            String word = tok.nextToken();
+    public static List<String> splitString(String msg, int lineSize) {
+        List<String> res = new ArrayList<>();
 
-            if (lineLen + word.length() > maxLineLength) {
-                output.append("\n");
-                lineLen = 0;
-            }
-            output.append(word);
-            lineLen += word.length();
+        Pattern p = Pattern.compile("\\b.{1," + (lineSize-1) + "}\\b\\W?");
+        Matcher m = p.matcher(msg);
+
+        while(m.find()) {
+            res.add(m.group());
         }
-        return output.toString().split("\n");
+        return res;
     }
 }
