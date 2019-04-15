@@ -26,43 +26,9 @@ public class CoordinatesManager {
     public static void clearTextBoxes(){
         textBoxes = new ArrayList<>();
     }
-/*
-    public static Rect getTextBoxPosition(Rect detectedBox) {
-        Rect textBox = new Rect();
-        //join left
-        if (detectedBox.left + Constants.textBoxWidth < Constants.SCREENWIDTH){
-            textBox.left = detectedBox.left;
-        }
-        else if(detectedBox.left - Constants.textBoxWidth >= 0){
-            textBox.left = detectedBox.left - Constants.textBoxWidth;
-        }
-        else{
-            textBox.left = detectedBox.right - Constants.textBoxWidth;
-        }
-        textBox.right = textBox.left + Constants.textBoxWidth;
-        //join top
-        if (detectedBox.bottom + Constants.textBoxHeight < Constants.SCREENHEIGHT){
-            textBox.top = detectedBox.bottom;
-        }
-        else if (detectedBox.top - Constants.textBoxHeight >= 0){
-            textBox.top = detectedBox.top - Constants.textBoxHeight;
-        }
-        else if(detectedBox.bottom - Constants.textBoxHeight >= 0){
-            textBox.top = detectedBox.bottom - Constants.textBoxHeight;
-        }
-        else {
-            textBox.top = detectedBox.top;
-        }
-        textBox.bottom = textBox.top + Constants.textBoxHeight;
-        if (!isIntersect(textBox)){
-            textBoxes.add(textBox);
-            return textBox;
-        }
-        return null;
-    }*/
 
     public static Rect getTextBoxPosition(Rect detectedBox){
-        if (textBoxes.size() > Constants.maxObjectsNumber) return null;
+        if (textBoxes.size() >= Constants.maxObjectsNumber) return null;
         Rect textBox = new Rect();
         /*
         if (detectedBox.left - textBoxWidth >= 0){
