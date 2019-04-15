@@ -88,7 +88,6 @@ public class BorderedText {
         paint.setStyle(Paint.Style.FILL);
         paint.setAlpha(160);
         canvas.drawRect(posX, (posY + (int) (textSize)), (posX + (int) (width)), posY, paint);
-
         canvas.drawText(text, posX, (posY + textSize), interiorPaint);
     }
 
