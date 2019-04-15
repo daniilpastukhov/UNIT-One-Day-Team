@@ -78,6 +78,7 @@ public class MultiBoxTracker {
     private final Paint boxPaint = new Paint();
     private final float textSizePx;
     private final BorderedText borderedText;
+    private final DetectedObjectsManager detectedObjectsManager;
     public ObjectTracker objectTracker;
     private Matrix frameToCanvasMatrix;
     private int frameWidth;
@@ -103,7 +104,7 @@ public class MultiBoxTracker {
                 TypedValue.applyDimension(
                         TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE_DIP, context.getResources().getDisplayMetrics());
         borderedText = new BorderedText(textSizePx);
-        DetectedObjectsManager detectedObjectsManager = new DetectedObjectsManager();
+        detectedObjectsManager = new DetectedObjectsManager();
     }
 
     private Matrix getFrameToCanvasMatrix() {
@@ -125,7 +126,6 @@ public class MultiBoxTracker {
             canvas.drawRect(rect, boxPaint);
             canvas.drawText("" + detection.first, rect.left, rect.top, textPaint);
             borderedText.drawText(canvas, rect.centerX(), rect.centerY(), "" + detection.first);
-
         }
 
         if (objectTracker == null) {
@@ -183,12 +183,15 @@ public class MultiBoxTracker {
 
             final String labelString =
                     !TextUtils.isEmpty(recognition.title)
-                            ? String.format("%s %.2f", recognition.title, (100 * recognition.detectionConfidence))
-                            : String.format("%.2f", (100 * recognition.detectionConfidence));
+                            ? String.format("%s", recognition.title)
+                            : String.format("Unknown object");
+                            /*? String.format("%s %.2f", recognition.title, (100 * recognition.detectionConfidence))
+                            : String.format("%.2f", (100 * recognition.detectionConfidence));*/
             //            borderedText.drawText(canvas, trackedPos.left + cornerSize, trackedPos.top,
             // labelString);
             borderedText.drawText(
                     canvas, trackedPos.left + cornerSize, trackedPos.top, labelString + "%", boxPaint);
+
         }
     }
 
