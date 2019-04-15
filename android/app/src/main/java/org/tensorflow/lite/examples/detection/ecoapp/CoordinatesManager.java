@@ -6,12 +6,12 @@ import java.util.ArrayList;
 
 public class CoordinatesManager {
     /*to do
-    get detected box coordinates Rect (x,y,width,height)
+    get detected box coordinates Rect (x,y,textBoxWidth,textBoxHeight)
     compute text box position
-    return Rect  (x,y,width,height)
+    return Rect  (x,y,textBoxWidth,textBoxHeight)
      */
-    private static int width;
-    private static int height;
+    private static int textBoxWidth;
+    private static int textBoxHeight;
     private static final int WIDTH = 0;
     private static final int HEIGHT = 1;
 
@@ -19,8 +19,8 @@ public class CoordinatesManager {
     private static ArrayList<Rect> textBoxes;
 
     public static void setTextBoxParams(int[] boxParams){
-        width = boxParams[WIDTH];
-        height = boxParams[HEIGHT];
+        textBoxWidth = boxParams[WIDTH];
+        textBoxHeight = boxParams[HEIGHT];
     }
 
     public static void clearTextBoxes(){
@@ -30,30 +30,30 @@ public class CoordinatesManager {
     public static Rect getTextBoxPosition(Rect detectedBox) {
         Rect textBox = new Rect();
         //join left
-        if (detectedBox.left + Constants.width < Constants.SCREENWIDTH){
+        if (detectedBox.left + Constants.textBoxWidth < Constants.SCREENWIDTH){
             textBox.left = detectedBox.left;
         }
-        else if(detectedBox.left - Constants.width >= 0){
-            textBox.left = detectedBox.left - Constants.width;
+        else if(detectedBox.left - Constants.textBoxWidth >= 0){
+            textBox.left = detectedBox.left - Constants.textBoxWidth;
         }
         else{
-            textBox.left = detectedBox.right - Constants.width;
+            textBox.left = detectedBox.right - Constants.textBoxWidth;
         }
-        textBox.right = textBox.left + Constants.width;
+        textBox.right = textBox.left + Constants.textBoxWidth;
         //join top
-        if (detectedBox.bottom + Constants.height < Constants.SCREENHEIGHT){
+        if (detectedBox.bottom + Constants.textBoxHeight < Constants.SCREENHEIGHT){
             textBox.top = detectedBox.bottom;
         }
-        else if (detectedBox.top - Constants.height >= 0){
-            textBox.top = detectedBox.top - Constants.height;
+        else if (detectedBox.top - Constants.textBoxHeight >= 0){
+            textBox.top = detectedBox.top - Constants.textBoxHeight;
         }
-        else if(detectedBox.bottom - Constants.height >= 0){
-            textBox.top = detectedBox.bottom - Constants.height;
+        else if(detectedBox.bottom - Constants.textBoxHeight >= 0){
+            textBox.top = detectedBox.bottom - Constants.textBoxHeight;
         }
         else {
             textBox.top = detectedBox.top;
         }
-        textBox.bottom = textBox.top + Constants.height;
+        textBox.bottom = textBox.top + Constants.textBoxHeight;
         if (!isIntersect(textBox)){
             textBoxes.add(textBox);
             return textBox;
@@ -62,23 +62,26 @@ public class CoordinatesManager {
     }*/
 
     public static Rect getTextBoxPosition(Rect detectedBox){
+        if (textBoxes.size() > Constants.maxObjectsNumber) return null;
         Rect textBox = new Rect();
-        if (detectedBox.left - width >= 0){
-            textBox.left = detectedBox.left - width;
+        /*
+        if (detectedBox.left - textBoxWidth >= 0){
+            textBox.left = detectedBox.left - textBoxWidth;
         }
-        else if (detectedBox.left + width < Constants.SCREENWIDTH){
+        else if (detectedBox.left + textBoxWidth < Constants.SCREENWIDTH){
             textBox.left = detectedBox.left;
         }
         else {
-            textBox.left = detectedBox.right - width;
-        }
-        textBox.right = textBox.left + width;
+            textBox.left = detectedBox.right - textBoxWidth;
+        }*/
+        textBox.left = detectedBox.left;
+        textBox.right = textBox.left + textBoxWidth;
         textBox.top = detectedBox.top;
-        textBox.bottom = textBox.top + height;
+        textBox.bottom = textBox.top + textBoxHeight;
         do {
             if (isIntersect(textBox)){
                 textBox.top += Constants.boxShift;
-                textBox.bottom = textBox.top + height;
+                textBox.bottom = textBox.top + textBoxHeight;
             }else {
                 textBoxes.add(textBox);
                 return textBox;
