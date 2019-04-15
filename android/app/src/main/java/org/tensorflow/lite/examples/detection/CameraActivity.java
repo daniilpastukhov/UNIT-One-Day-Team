@@ -553,4 +553,8 @@ public abstract class CameraActivity extends AppCompatActivity
     protected abstract void setNumThreads(int numThreads);
 
     protected abstract void setUseNNAPI(boolean isChecked);
+
+    public void showHints(View view) {
+        setContentView(R.layout.activity_hint_scrolling);
+    }
 }

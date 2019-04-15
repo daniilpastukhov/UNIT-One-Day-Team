@@ -40,9 +40,16 @@
             android:layout_alignParentTop="true"
             android:background="@color/semi_transparent"/>
 
-        <android.support.design.widget.NavigationView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/scrollingView"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="3dp"
+            android:text="@string/all_hints"
+            android:onClick="showHints"/>
 
     </RelativeLayout>
 
