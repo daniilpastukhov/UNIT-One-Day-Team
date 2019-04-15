@@ -18,11 +18,19 @@ public class CoordinatesManager {
         }
         boxParams.right = boxParams.left + Constants.textBoxWidth;
 
+        if (detectedBox.bottom + Constants.textBoxWHeight < Constants.SCREENHEIGHT){
+            boxParams.top = detectedBox.bottom;
+        }
+        else if (detectedBox.top - Constants.textBoxWHeight >= 0){
+            boxParams.top = detectedBox.top - Constants.textBoxWHeight;
+        }
+        else if(detectedBox.bottom - Constants.textBoxWHeight >= 0){
+            boxParams.top = detectedBox.bottom - Constants.textBoxWHeight;
+        }
+        else {
+            boxParams.top = detectedBox.top;
+        }
+        boxParams.bottom = boxParams.top + Constants.textBoxWHeight;
         return boxParams;
-    }
-
-    private boolean checkCorner(boolean up, int x, int y){
-        int posCoef = (up)? -1:1;
-        return true;
     }
 }
