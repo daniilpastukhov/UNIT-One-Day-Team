@@ -20,7 +20,7 @@ public class TextField {
     // String hint - string which contains a hint (max. 100 letters)
     public void drawTextField(int[] coords, String hint) {
         // TODO
-        borderedText.drawText();
+        //borderedText.drawText();
 
 
 

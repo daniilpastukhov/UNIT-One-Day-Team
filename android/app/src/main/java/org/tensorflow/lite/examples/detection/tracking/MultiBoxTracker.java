@@ -23,6 +23,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.text.TextUtils;
 import android.util.Pair;
@@ -33,6 +34,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+import org.tensorflow.lite.examples.detection.ecoapp.CoordinatesManager;
 import org.tensorflow.lite.examples.detection.ecoapp.DetectedObjectsManager;
 import org.tensorflow.lite.examples.detection.env.BorderedText;
 import org.tensorflow.lite.examples.detection.env.ImageUtils;
@@ -168,6 +170,7 @@ public class MultiBoxTracker {
                         (int) (multiplier * (rotated ? frameWidth : frameHeight)),
                         sensorOrientation,
                         false);
+        CoordinatesManager.clearTextBoxes();
         for (final TrackedRecognition recognition : trackedObjects) {
             final RectF trackedPos =
                     (objectTracker != null)
@@ -189,8 +192,12 @@ public class MultiBoxTracker {
                             : String.format("%.2f", (100 * recognition.detectionConfidence));*/
             //            borderedText.drawText(canvas, trackedPos.left + cornerSize, trackedPos.top,
             // labelString);
+            /*borderedText.drawText(
+                    canvas, trackedPos.left + cornerSize, trackedPos.top, labelString, boxPaint);*/
+            Rect boxParametrs = CoordinatesManager.getTextBoxPosition(new Rect((int)trackedPos.left, (int)trackedPos.top, (int)trackedPos.right, (int)trackedPos.bottom));
             borderedText.drawText(
-                    canvas, trackedPos.left + cornerSize, trackedPos.top, labelString, boxPaint);
+                    canvas, boxParametrs.left + cornerSize, boxParametrs.top, labelString, boxPaint);
+
 
         }
     }
