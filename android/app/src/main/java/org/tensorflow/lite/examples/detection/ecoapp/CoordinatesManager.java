@@ -50,6 +50,10 @@ public class CoordinatesManager {
         return null;
     }
 
+    public static Rect getTextBox(){
+        return null;
+    }
+
     private static boolean isIntersect(Rect textBox){
         for (Rect box: textBoxes){
             if (Rect.intersects(textBox, box)){
