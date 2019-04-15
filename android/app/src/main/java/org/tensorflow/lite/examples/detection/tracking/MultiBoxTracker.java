@@ -201,7 +201,7 @@ public class MultiBoxTracker {
             CoordinatesManager.setTextBoxParams(textField.getTextBoxSize(labelString));
             Rect boxParametrs = CoordinatesManager.getTextBoxPosition(new Rect((int)trackedPos.left, (int)trackedPos.top, (int)trackedPos.right, (int)trackedPos.bottom));
             if (boxParametrs != null) {
-                boxPaint.setColor(recognition.color);
+                boxPaint.setColor(Color.WHITE);
                 canvas.drawRoundRect(trackedPos, cornerSize, cornerSize, boxPaint);
                 textField.drawTextField(canvas, boxParametrs.left, boxParametrs.top,
                         labelString);
